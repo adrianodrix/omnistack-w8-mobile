@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from 'react-native'
 
 import logo from '../../assets/logo.png'
@@ -33,7 +34,7 @@ export default ({ navigation }) => {
 
       await AsyncStorage.setItem('user', _id)
 
-      navigation.navigate('Main', { _id })
+      navigation.navigate('Main', { user: _id })
     } catch (err) {
       console.error(err.message)
     }
@@ -45,7 +46,13 @@ export default ({ navigation }) => {
       enabled={Platform.OS === 'ios'}
       style={styles.container}
     >
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={styles.container.backgroundColor}
+      />
+
       <Image source={logo} />
+
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
